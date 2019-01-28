@@ -10,18 +10,18 @@ public class Amazons implements IAmazons
     //CONSTRUCTORS
     public Amazons()
     {
-        
+
         //initialize instance variables
         board= new Piece[10][10];
         currentPlayer = Piece.BLACK;
-        board[7][0]= Piece.WHITE;
-        board[7][10]= Piece.WHITE;
-        board[10][3]= Piece.WHITE;
-        board[10][7]= Piece.WHITE;
+        board[6][0]= Piece.WHITE;
+        board[6][9]= Piece.WHITE;
+        board[9][3]= Piece.WHITE;
+        board[9][6]= Piece.WHITE;
+        board[3][0]= Piece.BLACK;
+        board[3][9]= Piece.BLACK;
         board[0][3]= Piece.BLACK;
-        board[0][]= Piece.BLACK;
-        board[][]= Piece.BLACK;
-        board[][]= Piece.BLACK;
+        board[0][6]= Piece.BLACK;
         //currentPlayer = Piece.WHITE;
         //currentPlayer = Piece.ARROW;
         //setup the board to its initial state
@@ -96,9 +96,13 @@ public class Amazons implements IAmazons
      */
     public void move(Point from, Point to)
     {
-        Piece ph = getPiece(from);
-        board[from.getRow()][from.getCol()]=null;
-        board[to.getRow()][to.getCol()]=ph;
+        if(isPathEmpty(getPath(from,to)))
+        {
+            Piece ph = getPiece(from);
+            board[from.getRow()][from.getCol()]=null;
+            board[to.getRow()][to.getCol()]=ph;
+        }
+
     }
 
     /**
@@ -230,7 +234,6 @@ public class Amazons implements IAmazons
             }
 
         }
-
         return list;
     }
 
@@ -353,11 +356,16 @@ public class Amazons implements IAmazons
         list=getPath(move.getPiece(), move.getDestination());
         List<Point>arList = new LinkedList<Point>();
         arList=getPath(move.getDestination(), move.getArrow());
+        List<Point> revList= new LinkedList<Point>();
+        for(int i=arList.size()-1; i>=0; i++)
+        {
+            revList.add(arList.get(i));
+        }
         if((board[rows][cols]==Piece.WHITE)||(board[rows][cols]==Piece.BLACK))
         {
             if(isPathEmpty(list))
             {
-                if(isPathEmpty(arList))
+                if((isPathEmpty(arList))|| (arList==revList))
                 {
                     return true;
                 }
