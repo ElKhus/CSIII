@@ -1,0 +1,32 @@
+Class documentation
+<---- javadoc command: ---->
+C:\Program Files (x86)\BlueJ\jdk\bin\javadoc.exe
+-author
+-version
+-nodeprecated
+-package
+-Xdoclint:none
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.8
+-classpath
+C:\Program Files (x86)\BlueJ\lib\bluejcore.jar;C:\Program Files (x86)\BlueJ\lib\junit-4.11.jar;C:\Program Files (x86)\BlueJ\lib\hamcrest-core-1.3.jar;C:\Program Files (x86)\BlueJ\lib\lang-stride.jar;C:\Users\Elina\Documents\APCS\mayflower1.7.jar;C:\Program Files (x86)\BlueJ\lib\userlib\pi4j-core.jar;C:\Program Files (x86)\BlueJ\lib\userlib\pi4j-device.jar;C:\Program Files (x86)\BlueJ\lib\userlib\pi4j-gpio-extension.jar;C:\Program Files (x86)\BlueJ\lib\userlib\pi4j-service.jar;C:\Users\Elina\Documents\APCS\Lab28
+-d
+C:\Users\Elina\Documents\APCS\Lab28\doc
+-encoding
+UTF-8
+-charset
+UTF-8
+C:\Users\Elina\Documents\APCS\Lab28\BST.java
+<---- end of javadoc command ---->
+Loading source file C:\Users\Elina\Documents\APCS\Lab28\BST.java...
+C:\Users\Elina\Documents\APCS\Lab28\BST.java:80: error: ')' expected
+            if(node.hasRight()
+                              ^
+C:\Users\Elina\Documents\APCS\Lab28\BST.java:81: error: illegal start of statement
+        }
+        ^
+2 errors
