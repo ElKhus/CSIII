@@ -178,7 +178,7 @@ public class BST<E extends Comparable>
             if(node.hasLeftChild())
             {
                 return containsHelper(node.getLeft(), data);
-                
+
             }
         }
         else if (node.getData().compareTo(data)<0)
@@ -187,7 +187,7 @@ public class BST<E extends Comparable>
             {
                 return containsHelper(node.getRight(), data);
             }
-            
+
         }
         else
         {
@@ -200,20 +200,136 @@ public class BST<E extends Comparable>
     //If data is successfully removed return true, otherwise return false.
     public boolean remove(E data)
     {
-        return false;
+        BNode<E> nodel= root;
+        BNode<E> parent= null;
+        while(nodel!= null && nodel.getData()!=data)
+        {
+            parent=nodel;
+            if(nodel.getData().compareTo(data)>0)
+            {
+                nodel=nodel.getLeft();
+            }
+            if(nodel.getData().compareTo(data)<0)
+            {
+                nodel=nodel.getRight();
+            }
+        }
+        if(nodel==null)
+        {
+            return false;   
+        }
+        int kiddos=nodel.getNumChildren();
+        if(parent!=null)
+        {
+            if(kiddos==0)
+            {
+                if(nodel.getData().compareTo(parent.getData())>0)
+                {
+                    parent.setRight(null);
+                }
+                if(nodel.getData().compareTo(parent.getData())<0)
+                {
+                    parent.setLeft(null);
+                }
+            }
+            if(kiddos==1)
+            {
+                if(nodel.hasRightChild())
+                {
+                    if(nodel.getData().compareTo(parent.getData())>0)
+                    {
+                        parent.setRight(nodel.getRight());
+                    }
+                    if(nodel.getData().compareTo(parent.getData())<0)
+                    {
+                        parent.setLeft(nodel.getRight());
+                    }
+                }
+                if(nodel.hasLeftChild())
+                {
+                    if(nodel.getData().compareTo(parent.getData())>0)
+                    {
+                        parent.setRight(nodel.getLeft());
+                    }
+                    if(nodel.getData().compareTo(parent.getData())<0)
+                    {
+                        parent.setLeft(nodel.getLeft());
+                    }   
+                }
+            }
+            if(kiddos==2)
+            {
+                BNode<E> comroot =combine(nodel.getLeft(), nodel.getRight());
+                if(nodel.getData().compareTo(parent.getData())>0)
+                {
+                    parent.setRight(comroot);
+                }
+                if(nodel.getData().compareTo(parent.getData())<0)
+                {
+                    parent.setLeft(comroot);
+                }   
+            }
+        }
+        else if (parent==null)
+        {
+            if(kiddos==0)
+            {
+                nodel=null;
+            }
+            if(kiddos==1)
+            {
+                if(nodel.hasRightChild())
+                {
+                    nodel=nodel.getRight();
+                }   
+                else if(nodel.hasLeftChild())
+                {
+                    nodel=nodel.getLeft();
+                }
+            }
+            if(kiddos==2)
+            {
+                
+                BNode<E> combroot= combine(nodel.getLeft(), nodel.getRight());
+                nodel=combroot;
+            }
+        }
+        return true;
     }
-
+    
     //Recursive helper method for remove. Removes the smallest descendant from the specified node.
     public BNode<E> removeSmallestChild(BNode<E> node)
     {
-        return null;
+        if(node.hasLeftChild()==false)
+        {
+            return node;
+        }
+        if(node.hasLeftChild())
+        {
+            BNode<E> nodie= removeSmallestChild(node.getLeft());
+            if(nodie.equals(node.getLeft()))
+            {
+                nodie.setRight(node);
+                //nodie.setLeft(node.getLeft());
+            }
+            
+            return node;
+        }
+        return node;
     }
 
     //Helper method for remove. Reforms the left and right subtrees into a single
     //BST and returns its root node.
     public BNode<E> combine(BNode<E> left, BNode<E> right)
     {
-        return null;
+        BNode<E> x= removeSmallestChild(right);
+        if(x==right)
+        {
+            right=right.getRight();
+        }
+        x.setLeft(left);
+        x.setRight(right);
+        return x;
     }
 
     ///////////////////
