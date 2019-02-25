@@ -270,7 +270,7 @@ public class BST<E extends Comparable>
                 }   
             }
         }
-        else
+        else if (parent==null)
         {
             if(kiddos==0)
             {
@@ -289,13 +289,14 @@ public class BST<E extends Comparable>
             }
             if(kiddos==2)
             {
+                
                 BNode<E> combroot= combine(nodel.getLeft(), nodel.getRight());
-                parent=combroot;
+                nodel=combroot;
             }
         }
         return true;
     }
-
+    
     //Recursive helper method for remove. Removes the smallest descendant from the specified node.
     public BNode<E> removeSmallestChild(BNode<E> node)
     {
