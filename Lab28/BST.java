@@ -275,24 +275,24 @@ public class BST<E extends Comparable>
         {
             if(kiddos==0)
             {
-                nodel=null;
+                root=null;
             }
             if(kiddos==1)
             {
                 if(nodel.hasRightChild())
                 {
-                    nodel=nodel.getRight();
+                    root=nodel.getRight();
                 }   
                 else if(nodel.hasLeftChild())
                 {
-                    nodel=nodel.getLeft();
+                    root=nodel.getLeft();
                 }
             }
             if(kiddos==2)
             {
 
                 BNode<E> combroot= combine(nodel.getLeft(), nodel.getRight());
-                nodel= combroot;
+                root= combroot;
             }
         }
         return true;
@@ -320,14 +320,11 @@ public class BST<E extends Comparable>
     public BNode<E> combine(BNode<E> left, BNode<E> right)
     {
         BNode<E> x= removeSmallestChild(right);
-        // if(x.equals(right))
-        // {
-            // right=right.getRight();
-        // }
-        // else
-        // {
-            right=x.getRight();
-        // }
+        if(x.equals(right))
+        {
+            right=right.getRight();
+        }
+        
         x.setLeft(left);
         x.setRight(right);
         return x;
