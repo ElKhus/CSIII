@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.LinkedList;
+//
 public class BST<E extends Comparable>
 {
     private BNode<E> root;
@@ -319,14 +320,14 @@ public class BST<E extends Comparable>
     public BNode<E> combine(BNode<E> left, BNode<E> right)
     {
         BNode<E> x= removeSmallestChild(right);
-        if(x.equals(right))
-        {
-            right=right.getRight();
-        }
-        else
-        {
+        // if(x.equals(right))
+        // {
+            // right=right.getRight();
+        // }
+        // else
+        // {
             right=x.getRight();
-        }
+        // }
         x.setLeft(left);
         x.setRight(right);
         return x;
