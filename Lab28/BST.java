@@ -289,29 +289,27 @@ public class BST<E extends Comparable>
             }
             if(kiddos==2)
             {
-                
+
                 BNode<E> combroot= combine(nodel.getLeft(), nodel.getRight());
-                nodel=combroot;
+                nodel= combroot;
             }
         }
         return true;
     }
-    
+
     //Recursive helper method for remove. Removes the smallest descendant from the specified node.
     public BNode<E> removeSmallestChild(BNode<E> node)
     {
-        if(node.hasLeftChild()==false)
-        {
-            return node;
-        }
+
         if(node.hasLeftChild())
         {
             BNode<E> nodie= removeSmallestChild(node.getLeft());
-            if(nodie==node.getLeft())
+            if(nodie.equals(node.getLeft()))
             {
-                nodie.setRight(node.getLeft());
+                node.setLeft(nodie.getRight());
+                nodie.setRight(node);
+                return nodie;
             }
-            return node;
         }
         return node;
     }
@@ -321,9 +319,13 @@ public class BST<E extends Comparable>
     public BNode<E> combine(BNode<E> left, BNode<E> right)
     {
         BNode<E> x= removeSmallestChild(right);
-        if(x==right)
+        if(x.equals(right))
         {
             right=right.getRight();
+        }
+        else
+        {
+            right=x.getRight();
         }
         x.setLeft(left);
         x.setRight(right);
