@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.LinkedList;
+//
 public class BST<E extends Comparable>
 {
     private BNode<E> root;
@@ -274,46 +275,42 @@ public class BST<E extends Comparable>
         {
             if(kiddos==0)
             {
-                nodel=null;
+                root=null;
             }
             if(kiddos==1)
             {
                 if(nodel.hasRightChild())
                 {
-                    nodel=nodel.getRight();
+                    root=nodel.getRight();
                 }   
                 else if(nodel.hasLeftChild())
                 {
-                    nodel=nodel.getLeft();
+                    root=nodel.getLeft();
                 }
             }
             if(kiddos==2)
             {
-                
+
                 BNode<E> combroot= combine(nodel.getLeft(), nodel.getRight());
-                nodel=combroot;
+                root= combroot;
             }
         }
         return true;
     }
-    
+
     //Recursive helper method for remove. Removes the smallest descendant from the specified node.
     public BNode<E> removeSmallestChild(BNode<E> node)
     {
-        if(node.hasLeftChild()==false)
-        {
-            return node;
-        }
+
         if(node.hasLeftChild())
         {
             BNode<E> nodie= removeSmallestChild(node.getLeft());
             if(nodie.equals(node.getLeft()))
             {
+                node.setLeft(nodie.getRight());
                 nodie.setRight(node);
-                //nodie.setLeft(node.getLeft());
+                return nodie;
             }
-            
-            return node;
         }
         return node;
     }
@@ -323,10 +320,11 @@ public class BST<E extends Comparable>
     public BNode<E> combine(BNode<E> left, BNode<E> right)
     {
         BNode<E> x= removeSmallestChild(right);
-        if(x==right)
+        if(x.equals(right))
         {
             right=right.getRight();
         }
+        
         x.setLeft(left);
         x.setRight(right);
         return x;
