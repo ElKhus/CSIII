@@ -6,14 +6,18 @@ public class Heap<E extends Comparable> extends ListBinaryTree<E>
     @Override
     public void add(E data)
     {
-    	
+    	super.add(data);
+    	addHelper(0);
     }
     
     //Recursive helper method for add
     //Recusively swap the value at index and its parent while val is less than its parent
     private void addHelper(int index)
     {
-    	
+    	if(getValueAt(index)<getValueAt(index.getParentIndex()))
+    	{
+    	    
+    	   }
     }
     
     //returns true if the value at index is less than both of its children
