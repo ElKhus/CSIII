@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class ListBinaryTree <E>
 {
     protected List<E> list;
-
+    private int size;
     public ListBinaryTree() 
     {
         list = new ArrayList<E>();
@@ -21,50 +21,101 @@ public class ListBinaryTree <E>
     {
         for(E e : data)
         {
-            add(e);
+            list.add(e);
+            size++;
         }
     }
-
+    
     //Return the size of this tree
     public int size()
     {
-        return -1;
+        for(E e: list)
+        {
+            size++;
+        }
+        return size;
     }
 
     public String preorder()
     {
-        return preorderHelper(0, "");
+        String fullLine = new String();
+        fullLine= preorderHelper(0,"");
+        fullLine= "[" +fullLine+ "]";
+        return fullLine;
     }
 
     private String preorderHelper(int index, String ret)
     {
-        return "";
+        ret+=getValueAt(index);
+        int leftie= getLeftIndex(index);
+        if(leftie != -1)
+        {
+            ret+= ", " + preorderHelper(leftie, "");
+        }
+        int rightie= getRightIndex(index);
+        if(rightie != -1)
+        {
+            ret+= ", " + preorderHelper(rightie, "");
+        }
+        return ret;
     }
 
     public String inorder()
     {
-        return inorderHelper(0, "");
+        String fullLine = new String();
+        fullLine= inorderHelper(0, "");
+        fullLine= "[" + fullLine+ "]";
+        return fullLine;
     }
 
     private String inorderHelper(int index, String ret)
     {
-        return "";
+        int leftie= getLeftIndex(index);
+        if(leftie != -1)
+        {
+            ret+=inorderHelper(leftie, "")+", ";
+        }
+        ret+=getValueAt(index);
+        int rightie= getRightIndex(index);
+        if(rightie != -1)
+        {
+            ret+= ", " + inorderHelper(rightie, "");
+        }
+        return ret;
     }
 
     public String postorder()
     {
-        return postorderHelper(0, "");
+        String fullLine= new String();
+        fullLine= postorderHelper(0, "");
+        fullLine= "[" +fullLine+"]";
+        return fullLine;
     }
 
     private String postorderHelper(int index, String ret)
     {
-        return "";
+        int leftie= getLeftIndex(index);
+        if(leftie != -1)
+        {
+            ret+=postorderHelper(leftie, "")+", ";
+        }
+        int rightie= getRightIndex(index);
+        if(rightie != -1)
+        {
+            ret+=postorderHelper(rightie, "")+", ";
+        }
+        ret+=getValueAt(index);
+        return ret;
     }
 
     //return the value stored at the specified index
     //or null if the index is out of bounds
     public E getValueAt(int index)
     {
+        if(index>=0 && index<list.size())
+        {
+            return list.get(index);
+        }
         return null;
     }
 
@@ -73,6 +124,11 @@ public class ListBinaryTree <E>
     //if the node at the specified index does not have a parent, return -1
     public int getParentIndex(int index)
     {
+        if(index>0 && index<list.size())
+        {
+            int parent= (int) Math.floor((index-1)/2);
+            return parent;
+        }
         return -1;
     }
 
@@ -80,6 +136,11 @@ public class ListBinaryTree <E>
     //if there is no left child, return -1
     public int getLeftIndex(int parentIndex)
     {
+        int leftChild = (parentIndex*2)+1;
+        if(leftChild>0 && leftChild<list.size())
+        {
+            return leftChild;
+        }
         return -1;
     }
 
@@ -87,6 +148,11 @@ public class ListBinaryTree <E>
     //if there is no right child, return -1
     public int getRightIndex(int parentIndex)
     {
+        int rightChild = (parentIndex*2)+2;
+        if(rightChild>0 && rightChild<list.size())
+        {
+            return rightChild;
+        }
         return -1;
     }
 
@@ -94,7 +160,7 @@ public class ListBinaryTree <E>
     //swap the values located at indexA and indexB
     public void swap(int indexA, int indexB)
     {
-
+        
     }
 
 }
