@@ -160,7 +160,10 @@ public class ListBinaryTree <E>
     //swap the values located at indexA and indexB
     public void swap(int indexA, int indexB)
     {
-        
+        E a= getValueAt(indexA);
+        E b = getValueAt(indexB);
+        list.set(indexA, b);
+        list.set(indexB, a);
     }
 
 }
