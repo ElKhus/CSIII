@@ -9,12 +9,21 @@ editor.fx.0.height=0
 editor.fx.0.width=0
 editor.fx.0.x=0
 editor.fx.0.y=0
+<<<<<<< HEAD
 objectbench.height=97
 objectbench.width=508
 package.divider.horizontal=0.6
 package.divider.vertical=0.7189189189189189
 package.editor.height=259
 package.editor.width=405
+=======
+objectbench.height=170
+objectbench.width=643
+package.divider.horizontal=0.6
+package.divider.vertical=0.7181528662420382
+package.editor.height=444
+package.editor.width=553
+>>>>>>> c681976ecd1bc66e1f74321665d8130441d8856a
 package.editor.x=0
 package.editor.y=0
 package.frame.height=728
