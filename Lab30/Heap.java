@@ -27,53 +27,91 @@ public class Heap<E extends Comparable> extends ListBinaryTree<E>
     //returns true if the value at index is less than both of its children
     public boolean meetsHeapProperty(int index)
     {
-        
-        if((getValueAt(index).compareTo(getValueAt(getRightIndex(index))))<0)
+        E parent= getValueAt(index);
+        int left= getLeftIndex(index);
+        int right= getRightIndex(index);
+        if(getLeftIndex(index)!= -1 || parent.compareTo(left)>0)
         {
-            if((getValueAt(index).compareTo(getValueAt(getLeftIndex(index))))<0)
-            {
-                return true;
-            }
+            return false;
         }
-        return false;
+        if(getRightIndex(index)!= -1 || parent.compareTo(right)>0)
+        {
+            return false;
+        }
+        return true;
     }
 
     //Helper method
     //Returns the index of the child of the specified node with the smallest value
     private int getSmallestChildIndex(int index)
     {
-        if(getValueAt(getLeftIndex(index)).compareTo(getValueAt(getRightIndex(index)))>0)
+        
+        int left=getLeftIndex(index);
+        int right = getRightIndex(index);
+        if(left==-1)
         {
-            return getLeftIndex(index);
+            if(right==-1)
+            {
+                return -1;
+            }
+            return right;
         }
-        if(getValueAt(getRightIndex(index)).compareTo(getValueAt(getLeftIndex(index)))>0)
-        {   
-            return getRightIndex(index);
+        if(right==-1)
+        {
+            if(left==-1)
+            {
+                return -1;
+            }
+            return left;
         }
-        else{
-            return -1;
+        else
+        {
+            if(getValueAt(left).compareTo(getValueAt(right))<0)
+            {
+                 return left;
+            }
+            return right;
         }
     }
+
     //remove and return the value at the root of this heap
     //then reconstitute its heapness using the remove algorithm
     public E removeRoot()
     {
+        if(size()==0)
+        {
+            return null;
+        }
         E rootval= getValueAt(0);
-        swap(0,list.size());
-        
+        swap(0,list.size()-1);
+        removeLast();
+        sink(0);
         return rootval;
     }
 
     public void heapify()
     {
-
+        for(int i=size()-1; i>=0;i--)
+        {
+            sink(i);
+        }
     }
 
     //recursive helper method for heapify. 
     //This method "sinks" the value at index until it meets the heap property
     private void sink(int index)
     {
+        if(!meetsHeapProperty(index))
+        {
+            int kiddo= getSmallestChildIndex(index);
+            if(kiddo!=-1)
+            {
+                swap(index,kiddo);
+                sink(kiddo);
 
+            }
+
+        }
     }
 
     //do not edit this method!
