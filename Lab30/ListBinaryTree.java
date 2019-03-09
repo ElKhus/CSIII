@@ -33,11 +33,7 @@ public class ListBinaryTree <E>
     //Return the size of this tree
     public int size()
     {
-        for(E e: list)
-        {
-            size++;
-        }
-        return size;
+        return list.size();
     }
 
     public String preorder()

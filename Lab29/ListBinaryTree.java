@@ -161,11 +161,7 @@ public class ListBinaryTree <E>
     public void swap(int indexA, int indexB)
     {
         E a= getValueAt(indexA);
-<<<<<<< HEAD
         E b = getValueAt(indexB);
-=======
-        E b= getValueAt(indexB);
->>>>>>> c681976ecd1bc66e1f74321665d8130441d8856a
         list.set(indexA, b);
         list.set(indexB, a);
     }
