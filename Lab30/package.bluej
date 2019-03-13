@@ -5,6 +5,19 @@ dependency1.type=UsesDependency
 dependency2.from=Lab30Tester
 dependency2.to=Heap
 dependency2.type=UsesDependency
+<<<<<<< HEAD
+editor.fx.0.height=728
+editor.fx.0.width=682
+editor.fx.0.x=683
+editor.fx.0.y=0
+objectbench.height=97
+objectbench.width=643
+package.divider.horizontal=0.6
+package.divider.vertical=0.834658187599364
+package.editor.height=518
+package.editor.width=553
+package.editor.x=683
+=======
 editor.fx.0.height=1047
 editor.fx.0.width=974
 editor.fx.0.x=942
@@ -16,6 +29,7 @@ package.divider.vertical=0.8078141499472017
 package.editor.height=758
 package.editor.width=844
 package.editor.x=953
+>>>>>>> fee4365f738dbb010fd16f097eea3c46083faaa4
 package.editor.y=0
 package.frame.height=1047
 package.frame.width=974
@@ -34,26 +48,30 @@ target1.name=HeapTester
 target1.showInterface=false
 target1.type=ClassTarget
 target1.width=100
-target1.x=10
-target1.y=80
+target1.x=20
+target1.y=250
 target2.height=50
 target2.name=ListBinaryTree
 target2.showInterface=false
 target2.type=ClassTarget
 target2.width=140
 target2.x=10
+<<<<<<< HEAD
+target2.y=390
+=======
 target2.y=250
+>>>>>>> fee4365f738dbb010fd16f097eea3c46083faaa4
 target3.height=50
 target3.name=Lab30Tester
 target3.showInterface=false
 target3.type=UnitTestTarget
 target3.width=100
-target3.x=90
-target3.y=10
+target3.x=20
+target3.y=180
 target4.height=50
 target4.name=Heap
 target4.showInterface=false
 target4.type=ClassTarget
 target4.width=80
-target4.x=10
-target4.y=160
+target4.x=20
+target4.y=320
