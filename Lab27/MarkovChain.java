@@ -73,7 +73,6 @@ public class MarkovChain
             lastWord= ("[START]");
         }
         List<String> list = getNextWords();
-        //int random = (int)(Math.random()*(list.size()));
         return list.get((int)(Math.random()*(list.size())));
     }
 
