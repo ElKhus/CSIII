@@ -1,4 +1,3 @@
-//WordGraph
 import java.io.File;
 import java.util.Scanner;
 
@@ -46,35 +45,34 @@ class WordGraph
         newWord= newWord.trim();
 
         int weight = 1;
-        if(newWord != " ")
-        { 
-            if(newWord!= "")
-            {
-                graph.add(newWord);
-                if(lastWord!=null)
-                {
-                    weight+= graph.getWeight(lastWord, newWord);
-                    graph.addEdge(lastWord, newWord);
-                    graph.setWeight(lastWord, newWord, weight);
-                }
-                else
-                {
-                    graph.addEdge("[START]",newWord);
-                    graph.setWeight("[START]", newWord, weight);
-                    
-                }
-                
 
-                if(isEndWord(newWord))
-                {
-                    graph.addEdge(newWord, "[END]");
-                    graph.setWeight(newWord, "[END]",weight); 
-                }
-                lastWord = newWord;
+        if(newWord!= "")
+        {
+            graph.add(newWord);
+            if(lastWord!=null)
+            {
+                weight+= graph.getWeight(lastWord, newWord);
+                graph.addEdge(lastWord, newWord);
+                graph.setWeight(lastWord, newWord, weight);
             }
+            else
+            {
+                graph.addEdge("[START]",newWord);
+                graph.setWeight("[START]", newWord, weight);
+
+            }
+
+            if(isEndWord(newWord))
+            {
+                graph.addEdge(newWord, "[END]");
+                graph.setWeight(newWord, "[END]",weight); 
+            }
+            lastWord = newWord;
+
         }
 
     }
+
     /**
      *  Process a string by splitting it on spaces (use the split() method)
      *  and calling addWord() on each word.
@@ -118,6 +116,7 @@ class WordGraph
     {
         return graph;
     }
+
     public boolean isEndWord(String word)
     {
         String end = ".?!";
@@ -125,7 +124,7 @@ class WordGraph
         {
             return false;
         }
-        
+
         return end.contains(word.substring(word.length()-1));
     }
 }
