@@ -1,3 +1,4 @@
+//WordGraph
 import java.io.File;
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ class WordGraph
 
     //METHODS
     /**
-     *  "Sanatize" newWord by trimming extra spaces from the edges (use the trim() method)
+     *  "Sanatize" newWord by trimming extra spaces from the endges (use the trim() method)
      *  Add the specified word to the graph.
      *  Add an edge between lastWord and the newWord
      *  Increment the weight between these nodes by 1
@@ -43,39 +44,50 @@ class WordGraph
     {
         //TODO: add a word to the graph instance variable
         newWord= newWord.trim();
-        if(!newWord.equals(""))
-        {
-            graph.add(newWord);
-            if(lastWord!=null)
+
+        int weight = 1;
+        if(newWord != " ")
+        { 
+            if(newWord!= "")
             {
-                lastWord=("[START]");
-                graph.addEdge(lastWord, newWord);
-                graph.setWeight(lastWord, newWord, graph.getWeight(lastWord, newWord)+1);
+                graph.add(newWord);
+                if(lastWord!=null)
+                {
+                    weight+= graph.getWeight(lastWord, newWord);
+                    graph.addEdge(lastWord, newWord);
+                    graph.setWeight(lastWord, newWord, weight);
+                }
+                else
+                {
+                    graph.addEdge("[START]",newWord);
+                    graph.setWeight("[START]", newWord, weight);
+                    
+                }
+                
 
+                if(isEndWord(newWord))
+                {
+                    graph.addEdge(newWord, "[END]");
+                    graph.setWeight(newWord, "[END]",weight); 
+                }
+                lastWord = newWord;
             }
+        }
 
-            lastWord= newWord;
-        }
-        if(isEndWord(newWord))
-        {
-            graph.addEdge(newWord,"[END]");
-            lastWord=null;
-        }
     }
-
     /**
      *  Process a string by splitting it on spaces (use the split() method)
      *  and calling addWord() on each word.
-     */ 
+     */  
     public void processString(String str)
-    {
+    {  
         //TODO: add each word from str to the graph instance variable
-        String [] array = str.split(" ");
-        for(String a: array)
+        String[] x = str.split(" ");
+        for (int i=0; i<x.length;i++)
         {
-            addWord(a);
-        }
-    }
+            addWord(x[i]);
+        } 
+    } 
 
     /**
      *  Process a file by reading each line from a file (using nextLine() method)
@@ -106,11 +118,14 @@ class WordGraph
     {
         return graph;
     }
-
-    public boolean isEndWord(String newWord)
+    public boolean isEndWord(String word)
     {
-        String word= (".?!\"\"");
-        return word.contains(newWord.substring(newWord.length()-1));
+        String end = ".?!";
+        if (word.length()==0)
+        {
+            return false;
+        }
+        
+        return end.contains(word.substring(word.length()-1));
     }
-    
 }
