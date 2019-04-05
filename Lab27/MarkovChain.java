@@ -1,4 +1,4 @@
-//MarkovChain
+                  //MarkovChain
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
@@ -73,8 +73,8 @@ public class MarkovChain
             lastWord= ("[START]");
         }
         List<String> list = getNextWords();
-        int random = (int)(Math.random()*(list.size()));
-        return list.get(random);
+        //int random = (int)(Math.random()*(list.size()));
+        return list.get((int)(Math.random()*(list.size())));
     }
 
     /**
